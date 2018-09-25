@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>管理员列表</title>
+    <link rel="stylesheet" href="__ADMIN__/vendor/layui/css/layui.css">
+    <link rel="stylesheet" href="__ADMIN__/custom/css/style.css">
+</head>
+<body style="padding:10px 10px;margin-bottom:50px;">
+<form action="" class="layui-form">
+    <table class="layui-table" lay-size="sm">
+        <colgroup>
+            <col width="80">
+            <col>
+            <col width="300">
+            <col width="100">
+            <col width="100">
+            <col width="150">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>图片</th>
+            <th style="text-align: center">标题</th>
+            <th style="text-align: center">是否显示</th>
+            <th style="text-align: center">排序</th>
+            <th >操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--循环输出管理员列表-->
+        {volist name="pics" id="vo"}
+        <tr>
+            <td>{$vo.id}</td>
+            <td><img src="/{$vo.pic}" style="height: 50px;"></td>
+            <td style="text-align: center">{$vo.title}</td>
+            <td style="text-align: center"><input type="checkbox" value="{$vo.id}" name="isshow" lay-filter="isshow" lay-skin="switch" lay-text="显示|隐藏" {$vo.isshow ? "checked" : ""}></td>
+            <td style="text-align: center"><input type="text" style="text-align: center" name="sort" value="{$vo.sort}" required lay-verify="required" placeholder="请输入排序" autocomplete="off" class="layui-input sort" data="{$vo.id}"></td>
+            <td><a href="{:url('banner/edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-warm layui-btn-mini"><i class="layui-icon">&#xe642;</i>编辑</a><a href="{:url('banner/del',['id'=>$vo.id ,'pic'=>urlencode($vo.pic)])}" class="layui-btn layui-btn-danger layui-btn-mini del"><i class="layui-icon">&#xe640;</i>删除</a></td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+</form>
+<script src="__ADMIN__/vendor/js/jquery.js"></script>
+<script src="__ADMIN__/vendor/layui/layui.js"></script>
+<script src="__ADMIN__/custom/js/admin.js"></script>
+<script>
+    //JavaScript代码区域
+   $(function () {
+       $(window.parent.document).find('#righttitle').text($('title').text());
+   });
+    layui.use(['layer','form'], function(){
+        var layer = layui.layer;
+        var form = layui.form;
+        // 显示与隐藏
+        form.on('switch(isshow)', function(data){
+            var value;
+            value = data.elem.checked?1:0;
+            $.ajax({
+                type: 'post',
+                url: "{:url('admin/banner/setajax')}",
+                data: {'act':'show','v':value,'id':data.value},
+                success: function (msg) {
+                    if (msg == 1){
+                        layer.msg("操作成功!",{time:1000},function () {
+                            location.reload();
+                        })
+                    }
+                }
+            })
+        });
+        // 排序
+        $(".sort").change(function () {
+            var id = $(this).attr('data');
+            var value = $(this).val();
+            $.ajax({
+                type: 'post',
+                url: "{:url('admin/banner/setajax')}",
+                data: {'act':'sort','v':value,'id':id},
+                success: function (msg) {
+                    if (msg == 1){
+                        layer.msg("排序成功",{time:1000},function () {
+                            location.reload();
+                        })
+                    }
+                }
+            })
+        })
+
+        $(".del").on('click',function(){
+            var url = $(this).attr('href');
+            layer.confirm('确定要删除该轮播图吗?', {icon: 3, title:'温馨提示'}, function(index){
+                //do something
+                // alert(url);
+                location.href = url;
+                layer.close(index);
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

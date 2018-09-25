@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>内容列表</title>
+    <link rel="stylesheet" href="__ADMIN__/vendor/layui/css/layui.css">
+    <link rel="stylesheet" href="__ADMIN__/custom/css/style.css">
+</head>
+<body style="padding:10px 10px;margin-bottom:50px;">
+<form class="layui-form" action="{:url('article/delall')}" method="post">
+    <div>
+        <!--所属栏目-->
+        <div class="layui-form-item" style="float: right; clear: both">
+            <label class="layui-form-label">所属文章</label>
+            <div class="layui-input-inline">
+                <select name="aid" lay-filter="wenzhang">
+                    <option value="">显示全部内容</option>
+                    {volist name="article" id="vo"}
+                    <option value="{$vo.id}" {eq name="vo.id" value="$aid"}selected{/eq}>{$vo.title}</option>
+                    {/volist}
+                </select>
+            </div>
+        </div>
+    <table class="layui-table" lay-size="sm">
+        <colgroup>
+            <col width="60">
+            <col width="80">
+            <col>
+            <col width="100">
+            <col width="170">
+            <col width="80">
+            <col width="100">
+            <col width="200">
+        </colgroup>
+        <thead>
+        <tr style="height: 45px" pid="0">
+            <th style="text-align: center"><input type="checkbox" name="" lay-filter="quanxuan" lay-skin="primary"></th> <!--因为这里name值为空所以表头的这个value是不会被后端接收到的-->
+            <th style="text-align: center">ID</th>
+            <th>所属文章</th>
+            <th>读者ip</th>
+            <th>评论时间</th>
+            <th style="text-align: center">获赞数</th>
+            <th style="text-align: center">读者名称</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--循环输出栏目列表-->
+        {volist name="views" id="vo"}
+        <tr>
+            <td style="text-align: center"><input type="checkbox" name="id[]" class="qx" lay-skin="primary" value="{$vo.id}"></td>  <!--name="id[]"用中括号表示用数组的方式把每个id都提交，否侧只会提交最后选中的一个-->
+            <td style="text-align: center">{$vo.id}</td>
+            <td>{$vo.title}</td>
+            <td>{$vo.uid}</td>
+            <td>{$vo.addtime|date="Y/m/d H:i:s",###}</td>
+            <td>{$vo.views}</td>   <!--在模板中调用函数的格式必须是"|函数名="函数参数1,参数2,...", ###表示数据就是"|"前的数据-->
+            <td style="text-align: center">{$vo.uname}</td>
+            <td>
+                <button class="layui-btn layui-btn-mini {eq name="vo.views" value="0"}layui-btn-disabled{/eq} fabul" id="{$vo.id}"><i class="layui-icon">=</i>点赞列表</button>
+                <a href="{:url('article/fabuldel',['cid'=>$vo.id])}" class="layui-btn layui-btn-danger layui-btn-mini del"><i class="layui-icon">&#xe640;</i>删除</a>
+            </td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+    <!--分页-->
+    <div style="text-align: center">{$views->render()}</div>
+    </div>
+</form>
+<script src="__ADMIN__/vendor/js/jquery.js"></script>
+<script src="__ADMIN__/vendor/layui/layui.js"></script>
+<script src="__ADMIN__/custom/js/admin.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use(['form','layer'], function(){
+        var form = layui.form, layer = layui.layer;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+        });
+
+        $(".del").on('click',function(){
+            var url = $(this).attr('href');
+            layer.confirm('确定要删除吗?', {icon: 3, title:'温馨提示'}, function(index){
+                //do something
+                location.href = url;
+                layer.close(index);
+            });
+            return false;
+        });
+
+        // 监听栏目事件（layui）
+        form.on('select(wenzhang)', function(data){
+            var aid = data.value;
+            location.href = "{:url('admin/article/views')}?aid="+aid;
+        });
+
+        // 全选与取消
+        form.on('checkbox(quanxuan)', function(data){
+            if (data.elem.checked){
+                // 全选
+                $('.qx').prop('checked','checked');
+                form.render();  // 因为使用了layui框架，所以需要更新渲染，才能在网页中看到效果
+            }else{
+                // 取消全选
+                $('.qx').removeAttr('checked');
+                form.render();
+            }
+        });
+
+        // 点赞列表点击事件
+        $(".fabul").on('click',function (e) {
+            //iframe层-父子操作
+            var cid = $(this).attr("id");
+            if ($(this).hasClass("layui-btn-disabled")){  //  有layui-btn-disabled这个类的话说明没有图片，所以不能有点击事件
+                return false;
+            }
+            layer.open({
+                type: 2,
+                title: '点赞信息',
+                area: ['700px', '450px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '{:url("admin/article/fabul")}?cid='+cid,  // 这里的cid是comment id的缩写，也就是评论的的id
+            });
+            // 这里点击按钮默认是会自动跳转回来当前页面的，所以用preventDefault()阻止默认事件
+            e.preventDefault(); // 阻止默认事件，
+            // return false;
+        })
+    });
+
+    $(function () {
+        $(window.parent.document).find('#righttitle').text($('title').text());
+
+    });
+</script>
+</body>
+</html>

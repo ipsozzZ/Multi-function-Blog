@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>栏目编辑</title>
+    <link rel="stylesheet" href="__ADMIN__/vendor/layui/css/layui.css">
+    <link rel="stylesheet" href="__ADMIN__/custom/css/style.css">
+    <style>
+        .layui-form-select dl{z-index: 2;}
+        #thumb_list{padding-top: 8px;}
+        #thumb_list img{border: 1px solid #DDD;padding: 3px;border-radius: 5px;}
+        #thumb_list span{position: relative;display: inline-block;margin-right: 5px;}
+        #thumb_list span .delimg{position: absolute;right: 4px;top: 4px;}
+    </style>
+</head>
+<body style="padding: 0 10px;padding-bottom: 45px">
+<div class="">
+    <form class="layui-form" action="?" method="post">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">基本设置</li>
+                <li>扩展管理</li>
+                <li>内容设置</li>
+            </ul>
+            <div class="layui-tab-content">
+                <!--基本设置-->
+                <div class="layui-tab-item layui-show layui-anim layui-anim-upbit">
+                    <!--上级栏目-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">上级栏目</label>
+                        <div class="layui-input-inline">
+                            <select name="pid" lay-verify="required">
+                                <option value="0">顶级栏目</option>
+                                {volist name = "Cate" id = "vo"}
+                                <option value="{$vo.id}" {eq name="$vo.id" value="$curcate.pid"}selected{/eq}>{$vo.name}</option>
+                                {/volist}
+                            </select>
+                        </div>
+                    </div>
+                    <!--栏目名称-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">栏目名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="name" value="{$curcate.name}" required  lay-verify="required" placeholder="请输入栏目名称" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <!--栏目类型-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">栏目类型</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="type" value="1" title="单页" {eq name="curcate->getData('type')" value="1"}checked{/eq}>
+                            <input type="radio" name="type" value="2" title="PICTURES" {eq name="curcate->getData('type')" value="2"}checked{/eq}>
+                            <input type="radio" name="type" value="3" title="NEWS" {eq name="curcate->getData('type')" value="3"}checked{/eq}>
+                            <input type="radio" name="type" value="4" title="CONTACT" {eq name="curcate->getData('type')" value="4"}checked{/eq}>
+                        </div>
+                    </div>
+                    <!--标识-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">栏目标识</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="mark" value="{$curcate.mark}" placeholder="请输入栏目标识" autocomplete="off" class="layui-input" style="width: 150px;">
+                        </div>
+                    </div>
+                    <!--栏目是否显示-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">栏目是否显示</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="isshow" value="1" title="显示" {$curcate.isshow?"checked":""}>
+                            <input type="radio" name="isshow" value="0" title="隐藏" {$curcate.isshow?"":"checked"}>
+                        </div>
+                    </div>
+                    <!--排序-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">排序</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="sort" value="{$curcate.sort}" required  lay-verify="required" placeholder="请输入排序" autocomplete="off" class="layui-input" style="width: 60px;">
+                        </div>
+                    </div>
+                </div>
+                <!--扩展设置-->
+                <div class="layui-tab-item layui-anim layui-anim-upbit">
+                    <!--栏目图片-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">栏目图片</label>
+                        <div class="layui-input-block">
+                            <input type="hidden" name="pic" value="{$curcate.pic}" placeholder="请输入栏目图片" autocomplete="off" class="layui-input">
+                            <button type="button" class="layui-btn" id="uploadimg">
+                                <i class="layui-icon">&#xe67c;</i>上传栏目图片
+                            </button>
+                            <!--上传图片预览-->
+                            <div id="thumb_list">
+                                {if condition="$curcate.pic!=''"}
+                                    {volist name="$curcate.pics" id="vo"}
+                                    <span>
+                                        <img src="/{$vo}" alt="" height="80px">
+                                        <button type="button" class="layui-btn layui-btn-danger layui-btn-mini delimg" onclick="delimg(this);" data="{$vo}">
+                                        <i class="layui-icon">&#xe640;</i>
+                                        </button>
+                                    </span>
+                                    {/volist}
+                                {/if}
+                            </div>
+                        </div>
+                    </div>
+                    <!--关键字-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">关键字</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="keyword" value="{$curcate.keyword}" placeholder="请输入关键字" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <!--描述-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">描述</label>
+                        <div class="layui-input-block">
+                            <textarea name="desc" placeholder="请输入描述" class="layui-textarea">{$curcate.desc}</textarea>
+                        </div>
+                    </div>
+                    <!--摘要-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">摘要</label>
+                        <div class="layui-input-block">
+                            <textarea name="remark" placeholder="请输入摘要" class="layui-textarea">{$curcate.remark}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <!--内容设置-->
+                <div class="layui-tab-item layui-anim layui-anim-upbit">
+                    <!--内容-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">内容</label>
+                        <div class="layui-input-block">
+                            <!-- 加载百度编辑器的容器 -->
+                            <script id="content" name="content" type="text/plain" style="height: 300px;">{$curcate.content}</script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--按钮-->
+        <div class="layui-form-item">
+            <!--label位置填充-->
+            <label class="layui-form-label"></label>
+            <div class="">
+                <button class="layui-btn layui-btn-danger layui-btn-lg" lay-submit lay-filter="formDemo" style="margin-left: 10px">确定</button>
+                <!--<button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+            </div>
+        </div>
+    </form>
+</div>
+<!-- 配置文件 -->
+<script type="text/javascript" src="__ADMIN__/vendor/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__ADMIN__/vendor/ueditor/ueditor.all.js"></script>
+<script src="__ADMIN__/vendor/js/jquery.js"></script>
+<script src="__ADMIN__/vendor/layui/layui.js"></script>
+<script src="__ADMIN__/custom/js/admin.js"></script>
+<script>
+    var ue = UE.getEditor('content'); // 实例化百度编辑器
+    // layui 的加载
+    layui.use(['form','element','upload'], function(){
+        var upload = layui.upload;  //文件上传
+        var form = layui.form;  // 加载layui
+        var element = layui.element;  // <!--选项卡 依赖 element 模块否则无法进行功能性操作-->
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+        });
+
+        //创建一个文件上传组件
+        upload.render({
+            elem: '#uploadimg'
+            ,url: '{:url("category/uploadimg")}'
+            ,accept: 'images' //允许上传的文件类型
+            ,field: 'imgfile'  // 文件域的字段名
+            ,size: 5048 //最大允许上传的文件大小，单位是kb
+            ,done: function(res, index, upload){ //上传后的回调
+                layer.close(layer.index,{isOutAnim:true}); // layui的加载关闭，isOutAnim:true是layui的关闭动画
+                setTimeout(function () {
+                    layer.msg(res.msg);
+                    if (res.code == 1){
+                        var pic = $("input[name = 'pic']").val();
+                        if (pic == ""){
+                            $("input[name = 'pic']").val(res.img);
+                        }else {
+                            $("input[name = 'pic']").val(pic+","+res.img);
+                        }
+                        var str;  // 因为要上传多张，所以将预览图片的代码放到字符串里
+                        str = '<span>';
+                        str = str+'<img src="/'+res.img+'" alt="" height="80px">';
+                        str = str+'<button type="button" class="layui-btn layui-btn-danger layui-btn-mini delimg" onclick="delimg(this);" data="'+res.img+'">'
+                        str=str+'<i class="layui-icon">&#xe640;</i>'
+                        str=str+'</button>';
+                        str=str+'</span>';
+                        $("#thumb_list").append(str);
+                    }else {
+
+                    }
+                },500)
+            }
+            ,before:function () {   // 上传前加载loading
+                var index = layer.load();
+            }
+            //,……
+        })
+    });
+    //JavaScript代码区域
+    $(function () {
+        $(window.parent.document).find('#righttitle').text($('title').text());
+    });
+
+    // 删除栏目图片
+    function delimg(obj) {
+        // 获取到图片上传文本框中的值
+        var picurl = $(obj).attr('data');
+        // 使用ajax异步提交数据到后台
+        $.ajax({
+           type: "post",
+            url: '{:url("category/delimg")}',
+            data: {'url':picurl},
+            success:function (res) {  // 回调函数
+                // 删除图片时，删除上传图片文本框里的对应图片地址
+                var picvalue = $("input[name = 'pic']").val();
+                var str = "";
+                if(res.code==1 || res.code==2){
+                    if($("input[name = 'pic']").val()==picurl){
+                        $("input[name = 'pic']").val('');
+                    }else{
+                        str = picvalue.replace(picurl+",","");
+                        // 如果第一次没有找到,返回的str还是picurl,但如果找到了下面这一步就不能再传picurl这个原来的数据了，否则无法删除图片栏目文本框里对应图片的地址
+                        str = str.replace(","+picvalue,"");
+                        $("input[name = 'pic']").val(str);
+                    }
+                    layer.msg(res.msg);
+                    // 删除对应的预览图片
+                    $(obj).parent().remove();
+                }
+                if (res.code==0){
+                    layer.msg(res.msg);
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

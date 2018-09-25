@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="__ADMIN__/vendor/layui/css/layui.css">
+    <title>图片</title>
+</head>
+<body style="padding: 0 10px;">
+<table class="layui-table">
+    <colgroup>
+        <col width="60">
+        <col width="100">
+        <col>
+    </colgroup>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>点赞ip</th>
+        <th>点赞时间</th>
+    </tr>
+    </thead>
+    <tbody>
+    {volist name="fabul" id="vo"}
+    <tr>
+        <td>{$vo.id}</td>
+        <td>{$vo.uip}</td>
+        <td>{$vo.fabultime|date="Y/m/d H:i:s",###}</td>
+    </tr>
+    {/volist}
+    </tbody>
+    <div style="text-align: center">{$fabul->render()}</div>
+</table>
+
+<script src="__ADMIN__/vendor/layui/layui.js"></script>
+<script src="__ADMIN__/vendor/js/jquery.js"></script>
+<script>
+    function changesort(obj) {
+        var id = $(obj).attr("id");
+        var sortval = $(obj).val();
+        // alert(id+';'+sortval);
+        layui.use('layer',function () {
+            var layer = layui.layer;
+            $.ajax({
+                'type' : 'post',
+                'url' : '{:url("admin/article/picsort")}',
+                'data' : {'id': id, 'sort': sortval},
+                success: function (msg) {
+                    layer.msg(msg.msg,{time:1000},function () {
+                        if (msg.code == 1){
+                            window.location.reload();
+                        }
+                    })
+                }
+            })
+        });
+    }
+</script>
+</body>
+</html>

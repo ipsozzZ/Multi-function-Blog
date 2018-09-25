@@ -1,0 +1,25 @@
+<div class="top-main">
+    <div class="page-width clearfix">
+        <div class="logo" skinobjectzone="HtmlLogo_399"><a href="#"><img height="80px;"  src=" __INDEX__/images/logo.jpg"
+                                                                         alt="ipso"/></a></div>
+
+        <div class="top-main-content clearfix">
+            <nav class="nav">
+                <div class="main-nav clearfix" skinobjectzone="menu_468">
+                    <ul class="sf-menu">
+                        <li {eq name="currtype" value="0" }class="current"{/eq}><a class="first-level" href="{:url('index/Index/index')}" target><strong>HOME</strong></a><i></i></li>
+                        {volist name="cate" id="vo"}
+                        <li {eq name="currtype" value="$vo.type" }class="current"{/eq}><a class="first-level" href="{$vo.type|makeurl=###,$vo.id}" target><strong>{$vo.name}</strong></a><i></i>
+                            <ul class>
+                                {volist name="vo.child" id="v"}
+                                <li class><a class href="{$v.type|makeurl=###,$v.id}" target><strong>{$v.name}</strong></a></li>
+                                {/volist}
+                            </ul>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

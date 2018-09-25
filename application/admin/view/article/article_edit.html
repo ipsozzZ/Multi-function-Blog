@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>编辑内容</title>
+    <link rel="stylesheet" href="__ADMIN__/vendor/layui/css/layui.css">
+    <link rel="stylesheet" href="__ADMIN__/custom/css/style.css">
+    <style>
+        .layui-form-select dl{z-index: 2;}
+        #thumb_list{padding-top: 8px;}
+        #thumb_list img{border: 1px solid #DDD;padding: 3px;border-radius: 5px;}
+        #thumb_list span{position: relative;display: inline-block;margin-right: 5px;}
+        #thumb_list span .delimg{position: absolute;right: 4px;top: 4px;}
+    </style>
+</head>
+<body style="padding:10px 10px;margin-bottom:50px;">
+<div class="layui-container">
+    <form class="layui-form" action="?" method="post">
+        <!--所属栏目-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属栏目</label>
+            <div class="layui-input-inline">
+                <select name="cid" required lay-verify="required">
+                    <option value="">请选择所属栏目</option>
+                    {volist name="cate" id="vo"}
+                    <option value="{$vo.id}" {eq name="vo.id" value="$article.cid"}selected{/eq}>{$vo.name}</option>
+                    {/volist}
+                </select>
+            </div>
+        </div>
+        <!--标题-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" value="{$article.title}" required  lay-verify="required" placeholder="请输入内容标题" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--关键字-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">关键字</label>
+            <div class="layui-input-block">
+                <input type="text" name="keyword" value="{$article.keyword}" placeholder="请输入内容关键字" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--描述-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-block">
+                <textarea name="desc" placeholder="请输入内容描述" class="layui-textarea">{$article.desc}</textarea>
+            </div>
+        </div>
+        <!--摘要-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">摘要</label>
+            <div class="layui-input-block">
+                <textarea name="remark" placeholder="请输入内容摘要" class="layui-textarea">{$article.remark}</textarea>
+            </div>
+        </div>
+        <!--作者-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">作者</label>
+            <div class="layui-input-inline">
+                <input type="text" name="author" value="{$article.author}" placeholder="请输入内容作者" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--浏览次数-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">浏览次数</label>
+            <div class="layui-input-inline">
+                <input type="text" name="views" disabled  value="{$article.views}" required  lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--获点赞次数-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">获点赞次数</label>
+            <div class="layui-input-inline">
+                <input type="text" name="views" disabled  value="{$article.fabul}" required  lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--获评论次数-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">获评论次数</label>
+            <div class="layui-input-inline">
+                <input type="text" name="views" disabled  value="{$article.comment}" required  lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--添加时间-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">添加时间</label>
+            <div class="layui-input-inline">
+                <input type="text" name="addtime"  value="{$article.addtime|date = 'Y/m/d H:i:s',###}" required  lay-verify="required" placeholder="请输入内容添加时间" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--是否置顶-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否置顶</label>
+            <div class="layui-input-inline">
+                <input type="checkbox" name="istop" {$article.istop?"checked":""} lay-skin="switch" lay-text="置顶|取消" value="1">
+            </div>
+        </div>
+        <!--内容图片-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">内容图片</label>
+            <div class="layui-input-block">
+                <input type="hidden" name="pic" placeholder="请上传内容图片" autocomplete="off" class="layui-input">
+                <button type="button" class="layui-btn" id="uploadimg">
+                    <i class="layui-icon">&#xe67c;</i>上传内容图片
+                </button>
+                <!--图片预览-->
+                <div id="thumb_list">
+                    {volist name="$article.pic" id="vo"}
+                    {if condition = "$vo neq ''"}
+                        <span>
+                            <img src="/{$vo.pic}" alt="" height="80px">
+                            <button type="button" class="layui-btn layui-btn-danger layui-btn-mini delimg" onclick="delimg(this);" data="{$vo.pic}">
+                                <i class="layui-icon">&#xe640;</i>
+                            </button>
+                        </span>
+                    {/if}
+                    {/volist}
+                </div>
+            </div>
+        </div>
+        <!--内容-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">内容</label>
+            <div class="layui-input-block">
+                <!-- 加载百度编辑器的容器 -->
+                <!--<script id="content" name="content" type="text/plain" style="height: 300px;">{$article.content}</script>-->
+                <!--两种方法都可以，官方的是<script>-->
+                <textarea id="content" name="content" type="text/plain" style="height: 300px;">{$article.content}</textarea>
+            </div>
+        </div>
+        <!--表单令牌，用来避免重复提交表单-->
+        <input type="hidden" name="__token__" value="{$Request.token}" />
+        <!--按钮-->
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">修改</button>
+                <!--<button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+            </div>
+        </div>
+    </form>
+</div>
+<!-- 百度编辑器配置文件 -->
+<script type="text/javascript" src="__ADMIN__/vendor/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__ADMIN__/vendor/ueditor/ueditor.all.js"></script>
+<script src="__ADMIN__/vendor/js/jquery.js"></script>
+<script src="__ADMIN__/vendor/layui/layui.js"></script>
+<script src="__ADMIN__/custom/js/admin.js"></script>
+<script>
+    var ue = UE.getEditor('content'); // 实例化百度编辑器
+    layui.use(['form','upload'], function(){
+        var form = layui.form;  // 实例化一个form
+        var upload = layui.upload; // 实例化一个upload
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+        });
+
+        /*form.on('select(lanmu)', function(data){
+            console.log(data.elem);
+            console.log(data.value);
+            var lmtype = $(data.elem).find('option:selected').attr('data');
+            alert(lmtype);
+            switch (lmtype){
+                case "6":
+                    $("#team").fadeIn();
+                    $("#model").hide();
+                    break;
+                case "3":
+                    $("#team").hide();
+                    $("#model").fadeIn();
+                    break;
+                default:
+                    $("#team").hide();
+                    $("#model").hide();
+                    break;
+            }
+        });*/
+
+        //创建一个文件上传组件
+        upload.render({
+            elem: '#uploadimg'
+            ,url: '{:url("common/uploadimg")}'
+            ,accept: 'images' //允许上传的文件类型
+            ,field: 'imgfile'  // 文件域的字段名
+            ,size: 102400 //最大允许上传的文件大小，单位是kb
+            ,done: function(res, index, upload){ //上传后的回调
+                layer.close(layer.index,{isOutAnim:true}); // layui的加载关闭，isOutAnim:true是layui的关闭动画
+                setTimeout(function () {
+                    layer.msg(res.msg);
+                    if (res.code == 1){
+                        var pic = $("input[name = 'pic']").val();
+                        if (pic == ""){
+                            $("input[name = 'pic']").val(res.img);
+                        }else {
+                            $("input[name = 'pic']").val(pic+","+res.img);
+                        }
+                        var str;  // 因为要上传多张，所以将预览图片的代码放到字符串里
+                        str = '<span>';
+                        str = str+'<img src="/'+res.img+'" alt="" height="80px">';
+                        str = str+'<button type="button" class="layui-btn layui-btn-danger layui-btn-mini delimg" onclick="delimg(this);" data="'+res.img+'">'
+                        str=str+'<i class="layui-icon">&#xe640;</i>'
+                        str=str+'</button>';
+                        str=str+'</span>';
+                        $("#thumb_list").append(str);
+                    }else {
+
+                    }
+                },500)
+            }
+            ,before:function () {   // 上传前加载loading
+                var index = layer.load();
+            }
+            //,……
+        })
+    });
+
+    //JavaScript代码区域
+   $(function () {
+       $(window.parent.document).find('#righttitle').text($('title').text());
+   });
+
+    // 删除内容图片
+    function delimg(obj) {
+        // 获取到图片上传文本框中的值
+        var picurl = $(obj).attr('data');
+        // 使用ajax异步提交数据到后台
+        $.ajax({
+            type: "post",
+            url: '{:url("common/delimg")}',
+            data: {'url':picurl},
+            success:function (res) {  // 回调函数
+                // 删除图片时，删除上传图片文本框里的对应图片地址
+                var picvalue = $("input[name = 'pic']").val();
+                var str = "";
+                if(res.code==1 || res.code==2){
+                    if($("input[name = 'pic']").val()==picurl){
+                        $("input[name = 'pic']").val('');
+                    }else{
+                        str = picvalue.replace(picurl+",","");
+                        // 如果第一次没有找到,返回的str还是picurl,但如果找到了下面这一步就不能再传picurl这个原来的数据了，否则无法删除图片栏目文本框里对应图片的地址
+                        str = str.replace(","+picvalue,"");
+                        $("input[name = 'pic']").val(str);
+                    }
+                    layer.msg(res.msg);
+                    // 删除对应的预览图片
+                    $(obj).parent().remove();
+                }
+                if (res.code==0){
+                    layer.msg(res.msg);
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>
