@@ -1,2 +1,2 @@
 # Multi-function-Blog
-功能强大的博客系统，也可用于团队主页
+网站链接：[ipso](http://www.ipso.live)
