@@ -8,7 +8,7 @@
  */
 
 namespace app\admin\controller;
-use app\admin\model\Category as CateModel;  // 因为Category与当前控制器重名，所以用as将model中的Category名字用CateModel代替
+use app\admin\model\Category as CateModel;
 
 class Category extends Common
 {

@@ -24,7 +24,7 @@ class Common extends Controller
                $this->redirect('login/index');
             }
             $this->error('未登录，不允许访问！','login/index');
-//            $this->redirect('login/index');
+		//            $this->redirect('login/index');	
         }
         // 获取网站配置信息
         $configRes = db('config')->find();
@@ -78,5 +78,5 @@ class Common extends Controller
         if ($pic){
             db('pics')->delete($pic['id']);
         }
-    }
+		}
 }
