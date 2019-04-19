@@ -10,7 +10,7 @@ class Index extends Common
         $banner = $this->getbanner();
         $about = $this->getabout();
         $pictures = $this->getpictures();
-        $pic_cate = $this->getcatebyid($pictures[0]['list'][0]['cid']);
+        $pic_cate = $this->getcatebyid($pictures[1]['list'][0]['cid']);
         $this->assign([
             'banner' => $banner,
             'about' => $about,

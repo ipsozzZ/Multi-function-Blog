@@ -69,9 +69,9 @@
             <td style="text-align: center">{if condition="$vo.pic eq 0"}无图{else}有图 <span class="layui-badge">{$vo.pic}</span>张{/if}</td>
             <td style="text-align: center;"><input type="checkbox" lay-filter="istop" name="istop" value="{$vo.id}" lay-skin="switch" {$vo.istop?"checked":""} lay-text="置顶|取消"></td>
             <td>
-                <button class="layui-btn layui-btn-mini {eq name="vo.pic" value="0"}layui-btn-disabled{/eq} tupian" id="{$vo.id}"><i class="layui-icon">&#xe64a;</i>图片列表</button>
-                <a href="{:url('article/edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-warm layui-btn-mini"><i class="layui-icon">&#xe642;</i>编辑</a>
-                <a href="{:url('article/del',['aid'=>$vo.id])}" class="layui-btn layui-btn-danger layui-btn-mini del"><i class="layui-icon">&#xe640;</i>删除</a>
+                <button class="layui-btn layui-btn-mini {eq name="vo.pic" value="0"}layui-btn-disabled{/eq} tupian" id="{$vo.id}"><i class="layui-icon"></i>图片列表</button>
+                <a href="{:url('article/edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-warm layui-btn-mini"><i class="layui-icon"></i>编辑</a>
+                <a href="{:url('article/del',['aid'=>$vo.id])}" class="layui-btn layui-btn-danger layui-btn-mini del"><i class="layui-icon"></i>删除</a>
             </td>
         </tr>
         {/volist}

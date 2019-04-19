@@ -109,6 +109,9 @@ class News extends Common
         if ($comment == null || $aid == null){
             return json("请输入你想要对作者说的话");
         }else{
+            if (!db('article')->where('id',$aid)->find()){
+                return json("文章不存在或已被作者删除!!");
+            }
             $data = [
                 'aid' => $aid,
                 'content' => $comment,
@@ -121,15 +124,15 @@ class News extends Common
             $res = db('comment')->insert($data);
             // 将文章表中的文章评论数量加1
             if (!$res){
-                return json("糟糕！发表评论失败!!");
+               return json("糟糕！发表评论失败!!");
             }
-            $Acomment = db('article')->where('id',$aid)->field('id,comment')->find();
-            $Acomment['comment'] = $Acomment['comment'] + 1;
-            $result = db('article')->where('id',$aid)->setField('comment',$Acomment['comment']);
-            if ($result==0){
-                return json("糟糕！发表评论失败!!");
-            }
-            return json("ok");
+             $Acomment = db('article')->where('id',$aid)->field('id,comment')->find();
+                $Acomment['comment'] = $Acomment['comment'] + 1;
+                $result = db('article')->where('id',$aid)->setField('comment',$Acomment['comment']);
+                if ($result==0){
+                    return json("糟糕！发表评论失败!!");
+                }
+                return json("ok");
         }
     }
 

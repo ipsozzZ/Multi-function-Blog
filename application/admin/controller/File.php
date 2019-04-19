@@ -9,7 +9,7 @@ class File extends Common
     {
         $currdir = mb_convert_encoding($currdir,'GB2312','UTF-8'); // 这里要将UTF-8格式的$currdir重新转换为GB2312格式的路径，否则无法打开目录
         if ($currdir){
-            if (file_exists($currdir)){   // file_exists() 判断是否存在
+            if (@file_exists($currdir)){   // file_exists() 判断是否存在
                 // 在网站根目录下的文件才允许访问，其它的没有权限访问
                 if (stripos($currdir,ROOT_PATH)===0 && stripos($currdir,ROOT_PATH.'..')===false){  // stripos(str1,str2)判断str1是否包含在str2中，并且是首次出现
                     chdir($currdir);  // chdir() 切换当前目录

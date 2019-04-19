@@ -5,7 +5,7 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-f
 #   隐藏入口文件的方法之一,加'?'
-  RewriteRule ^(.*)$ index.php?/$1 [QSA,PT,L]
+  RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
 # 隐藏入口文件的方法之二
   #RewriteRule ^(.*)$ index.php [L,E=PATH_INFO:$1]
 </IfModule>

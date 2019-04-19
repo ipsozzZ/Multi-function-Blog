@@ -24,7 +24,7 @@ class Common extends Controller
                $this->redirect('login/index');
             }
             $this->error('未登录，不允许访问！','login/index');
-		//            $this->redirect('login/index');	
+//            $this->redirect('login/index');
         }
         // 获取网站配置信息
         $configRes = db('config')->find();
@@ -41,7 +41,7 @@ class Common extends Controller
         // 判断$file是不是文件对象
         if ($file){
             $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads'); // 上传文件到网站指定目录
-            $imgPath ="uploads\\".$info->getSaveName();  // 获取图片地址
+            $imgPath ="uploads\\".$info->getSaveName();  // 获取图片地址 ,“\\”是因为只有一个的话默认为转移，所以需要反斜杠的话要用“\\”
             return json(['code'=>1 ,'msg'=>'上传成功!','img'=>$imgPath]);
         }else{
             return json(['code'=>0 ,'msg'=>$file->gatError()]);
@@ -78,5 +78,5 @@ class Common extends Controller
         if ($pic){
             db('pics')->delete($pic['id']);
         }
-		}
+    }
 }
