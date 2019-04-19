@@ -7,6 +7,7 @@
  */
 
 namespace app\admin\controller;
+use app\admin\model\Manager as Model;
 //use think\Controller;
 //use think\Validate;
 

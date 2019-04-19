@@ -32,3 +32,149 @@
 [ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 46 LIMIT 1 [ RunTime:0.000320s ]
 [ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 47 LIMIT 1 [ RunTime:0.000329s ]
 [ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 45 LIMIT 1 [ RunTime:0.000304s ]
+---------------------------------------------------------------
+[ 2019-04-19T11:53:01+08:00 ] 127.0.0.1 GET /
+[ error ] [1045]SQLSTATE[HY000] [1045] Access denied for user '1975386453'@'localhost' (using password: YES)
+---------------------------------------------------------------
+[ 2019-04-19T11:53:28+08:00 ] 127.0.0.1 GET /
+[ error ] [1045]SQLSTATE[HY000] [1045] Access denied for user '1975386453'@'localhost' (using password: YES)
+---------------------------------------------------------------
+[ 2019-04-19T11:55:32+08:00 ] 127.0.0.1 GET /
+[ error ] [1045]SQLSTATE[HY000] [1045] Access denied for user '1975386453'@'localhost' (using password: YES)
+---------------------------------------------------------------
+[ 2019-04-19T11:55:50+08:00 ] 127.0.0.1 GET /
+[ error ] [1045]SQLSTATE[HY000] [1045] Access denied for user '1975386453'@'localhost' (using password: YES)
+---------------------------------------------------------------
+[ 2019-04-19T11:55:52+08:00 ] 127.0.0.1 GET /
+[ error ] [1045]SQLSTATE[HY000] [1045] Access denied for user '1975386453'@'localhost' (using password: YES)
+---------------------------------------------------------------
+[ 2019-04-19T11:57:17+08:00 ] 127.0.0.1 GET /
+[ error ] [1045]SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+---------------------------------------------------------------
+[ 2019-04-19T11:57:19+08:00 ] 127.0.0.1 GET /
+[ error ] [1045]SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+---------------------------------------------------------------
+[ 2019-04-19T11:57:21+08:00 ] 127.0.0.1 GET /
+[ error ] [1045]SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+---------------------------------------------------------------
+[ 2019-04-19T11:57:58+08:00 ] 127.0.0.1 GET /
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012607812881469726562500000000s ] mysql:host=127.0.0.1;dbname=ipsodatabase;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `qm_category` [ RunTime:0.016686s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 0  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000474s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 29  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000328s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 33  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000320s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 42  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000354s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 45  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000310s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `qm_config` [ RunTime:0.012538s ]
+[ sql ] [ SQL ] SELECT `config` FROM `qm_config` LIMIT 1 [ RunTime:0.000392s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `qm_banner` [ RunTime:0.015585s ]
+[ sql ] [ SQL ] SELECT `title`,`pic`,`url` FROM `qm_banner` WHERE  `isshow` = 1 ORDER BY `sort` ASC [ RunTime:0.000489s ]
+[ sql ] [ SQL ] SELECT `content`,`name`,`keyword` FROM `qm_category` WHERE  `mark` = 'about' LIMIT 1 [ RunTime:0.000409s ]
+[ sql ] [ SQL ] SELECT `id` FROM `qm_category` WHERE  `mark` = 'pictures' LIMIT 1 [ RunTime:0.000331s ]
+[ sql ] [ SQL ] SELECT `id`,`name` FROM `qm_category` WHERE  `pid` = 33 [ RunTime:0.000353s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `qm_article` [ RunTime:0.014670s ]
+[ sql ] [ SQL ] SELECT `a`.`id`,`a`.`title`,`a`.`cid`,`b`.`pic` FROM `qm_article` `a` INNER JOIN `qm_pics` `b` ON `b`.`aid`=`a`.`id` WHERE  `a`.`cid` = 37  AND `a`.`istop` = 1 [ RunTime:0.001075s ]
+[ sql ] [ SQL ] SELECT `a`.`id`,`a`.`title`,`a`.`cid`,`b`.`pic` FROM `qm_article` `a` INNER JOIN `qm_pics` `b` ON `b`.`aid`=`a`.`id` WHERE  `a`.`cid` = 46  AND `a`.`istop` = 1 [ RunTime:0.000550s ]
+[ sql ] [ SQL ] SELECT `a`.`id`,`a`.`title`,`a`.`cid`,`b`.`pic` FROM `qm_article` `a` INNER JOIN `qm_pics` `b` ON `b`.`aid`=`a`.`id` WHERE  `a`.`cid` = 47  AND `a`.`istop` = 1 [ RunTime:0.000479s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`pid`,`keyword` FROM `qm_category` WHERE  `id` = 46 [ RunTime:0.000370s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`pid`,`keyword` FROM `qm_category` WHERE  `id` = 33 [ RunTime:0.000301s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 29 LIMIT 1 [ RunTime:0.000853s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 33 LIMIT 1 [ RunTime:0.000372s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 37 LIMIT 1 [ RunTime:0.000384s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 46 LIMIT 1 [ RunTime:0.000348s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 47 LIMIT 1 [ RunTime:0.000437s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 42 LIMIT 1 [ RunTime:0.000447s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 43 LIMIT 1 [ RunTime:0.000386s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 44 LIMIT 1 [ RunTime:0.000400s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 45 LIMIT 1 [ RunTime:0.000368s ]
+---------------------------------------------------------------
+[ 2019-04-19T11:58:07+08:00 ] 127.0.0.1 GET /about/29.html
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001909017562866210937500000000s ] mysql:host=127.0.0.1;dbname=ipsodatabase;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `qm_category` [ RunTime:0.016454s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 0  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000439s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 29  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000473s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 33  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000527s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 42  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000386s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 45  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000308s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `qm_config` [ RunTime:0.010512s ]
+[ sql ] [ SQL ] SELECT `config` FROM `qm_config` LIMIT 1 [ RunTime:0.000436s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `id` = 29 LIMIT 1 [ RunTime:0.000439s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `mark` = 'about' [ RunTime:0.000365s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 29 LIMIT 1 [ RunTime:0.000463s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 33 LIMIT 1 [ RunTime:0.000377s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 37 LIMIT 1 [ RunTime:0.000385s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 46 LIMIT 1 [ RunTime:0.000379s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 47 LIMIT 1 [ RunTime:0.000371s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 42 LIMIT 1 [ RunTime:0.000606s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 43 LIMIT 1 [ RunTime:0.000566s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 44 LIMIT 1 [ RunTime:0.000678s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 45 LIMIT 1 [ RunTime:0.000633s ]
+[ sql ] [ SQL ] SELECT `pic`,`pid` FROM `qm_category` WHERE  `id` = 29 LIMIT 1 [ RunTime:0.000318s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`pid` FROM `qm_category` WHERE  `id` = 29 LIMIT 1 [ RunTime:0.000357s ]
+---------------------------------------------------------------
+[ 2019-04-19T11:58:11+08:00 ] 127.0.0.1 GET /pictures/list/37.html
+[ sql ] [ DB ] CONNECT:[ UseTime:0.005367040634155273437500000000s ] mysql:host=127.0.0.1;dbname=ipsodatabase;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `qm_category` [ RunTime:0.014465s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 0  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000450s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 29  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000366s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 33  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000402s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 42  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000401s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 45  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000362s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `qm_config` [ RunTime:0.010413s ]
+[ sql ] [ SQL ] SELECT `config` FROM `qm_config` LIMIT 1 [ RunTime:0.000322s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `mark` = 'pictures' [ RunTime:0.000379s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `qm_article` [ RunTime:0.011255s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `qm_article` `a` INNER JOIN `qm_pics` `b` ON `b`.`aid`=`a`.`id` WHERE  `cid` = 37 LIMIT 1 [ RunTime:0.032028s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`pic` FROM `qm_article` `a` INNER JOIN `qm_pics` `b` ON `b`.`aid`=`a`.`id` WHERE  `cid` = 37 LIMIT 0,8 [ RunTime:0.001897s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `id` = 37 LIMIT 1 [ RunTime:0.001205s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 29 LIMIT 1 [ RunTime:0.000457s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 33 LIMIT 1 [ RunTime:0.000414s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 37 LIMIT 1 [ RunTime:0.000361s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 46 LIMIT 1 [ RunTime:0.000454s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 47 LIMIT 1 [ RunTime:0.000385s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 42 LIMIT 1 [ RunTime:0.000361s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 43 LIMIT 1 [ RunTime:0.000323s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 44 LIMIT 1 [ RunTime:0.000311s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 45 LIMIT 1 [ RunTime:0.000293s ]
+[ sql ] [ SQL ] SELECT `pic`,`pid` FROM `qm_category` WHERE  `id` = 37 LIMIT 1 [ RunTime:0.000263s ]
+[ sql ] [ SQL ] SELECT `pic`,`pid` FROM `qm_category` WHERE  `id` = 33 LIMIT 1 [ RunTime:0.000260s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`pid` FROM `qm_category` WHERE  `id` = 37 LIMIT 1 [ RunTime:0.000237s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`pid` FROM `qm_category` WHERE  `id` = 33 LIMIT 1 [ RunTime:0.000236s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 37 LIMIT 1 [ RunTime:0.000342s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 46 LIMIT 1 [ RunTime:0.000268s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 47 LIMIT 1 [ RunTime:0.000264s ]
+---------------------------------------------------------------
+[ 2019-04-19T12:05:32+08:00 ] 127.0.0.1 GET /pictures/list/37.html
+[ error ] [1045]SQLSTATE[HY000] [1045] Access denied for user 'ipso'@'localhost' (using password: YES)
+---------------------------------------------------------------
+[ 2019-04-19T12:05:40+08:00 ] 127.0.0.1 GET /pictures/list/37.html
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001986980438232421875000000000s ] mysql:host=127.0.0.1;dbname=ipsodatabase;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `qm_category` [ RunTime:0.015953s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 0  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000567s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 29  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000497s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 33  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000490s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 42  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000483s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `pid` = 45  AND `isshow` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000398s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `qm_config` [ RunTime:0.016878s ]
+[ sql ] [ SQL ] SELECT `config` FROM `qm_config` LIMIT 1 [ RunTime:0.000419s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`type` FROM `qm_category` WHERE  `mark` = 'pictures' [ RunTime:0.000492s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `qm_article` [ RunTime:0.015752s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `qm_article` `a` INNER JOIN `qm_pics` `b` ON `b`.`aid`=`a`.`id` WHERE  `cid` = 37 LIMIT 1 [ RunTime:0.000589s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`pic` FROM `qm_article` `a` INNER JOIN `qm_pics` `b` ON `b`.`aid`=`a`.`id` WHERE  `cid` = 37 LIMIT 0,8 [ RunTime:0.000793s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `id` = 37 LIMIT 1 [ RunTime:0.000576s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 29 LIMIT 1 [ RunTime:0.000492s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 33 LIMIT 1 [ RunTime:0.000394s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 37 LIMIT 1 [ RunTime:0.000556s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 46 LIMIT 1 [ RunTime:0.000428s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 47 LIMIT 1 [ RunTime:0.000537s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 42 LIMIT 1 [ RunTime:0.000480s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 43 LIMIT 1 [ RunTime:0.000492s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 44 LIMIT 1 [ RunTime:0.000353s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 45 LIMIT 1 [ RunTime:0.000444s ]
+[ sql ] [ SQL ] SELECT `pic`,`pid` FROM `qm_category` WHERE  `id` = 37 LIMIT 1 [ RunTime:0.000448s ]
+[ sql ] [ SQL ] SELECT `pic`,`pid` FROM `qm_category` WHERE  `id` = 33 LIMIT 1 [ RunTime:0.000560s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`pid` FROM `qm_category` WHERE  `id` = 37 LIMIT 1 [ RunTime:0.000505s ]
+[ sql ] [ SQL ] SELECT `id`,`name`,`pid` FROM `qm_category` WHERE  `id` = 33 LIMIT 1 [ RunTime:0.000354s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 37 LIMIT 1 [ RunTime:0.000352s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 46 LIMIT 1 [ RunTime:0.000414s ]
+[ sql ] [ SQL ] SELECT * FROM `qm_category` WHERE  `pid` = 47 LIMIT 1 [ RunTime:0.000316s ]
